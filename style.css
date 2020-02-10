@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Rationale&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #212121;
+    font-family: 'Rationale', sans-serif;
+    user-select: none;
+}
+
+.calc-btn{
+    background-color:#003352;
+    color: cyan;
+    width: 75px;
+    height: 50px;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+}
+
+.calc-btn:hover{
+    background-color: white;
+}
+
+.calc-btn-num{
+    background-color:#003366;
+}
+
+#calc-AC {
+    background-color: gray;
+}
+
+#calc-AC:hover{
+    background-color: white;
+}
+
+#calc-clear{
+    background-color: gray;
+}
+
+#calc-clear:hover{
+    background-color: white;
+}
+.row{
+    display: table;
+    table-layout: fixed;
+    width: 200px;
+}
+
+.column{
+    display: table-cell;
+}
+
+#calc-0{
+    width: 152px;
+    border-radius: 0 0 0 7px;
+}
+
+#calc-AC{
+    width: 152px;
+}
+
+#display-val{
+    height: 75px;
+    width: 308px;
+    text-align: right;
+    font-size: 60px;
+    background-color: black;
+    color: cyan;
+    border-radius: 7px 7px 0 0;
+}
+
+#calc-equal{
+    border-radius: 0 0 7px 0;
+}
+
+.title{
+    text-align: center;
+    color: cyan;
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+.main {
+    margin-left: calc(50% - 154px);
+}

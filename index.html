@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="Stylesheet" type="Text/css" href="style.css">
+    <title>Calculator</title>   
+</head>
+<body>
+    <h1 class="title">Calculator</h1>
+    <div class="main">
+        <div div class="row">
+            <div class="column" id="display-val">0</div>
+        </div>
+        <div class="row">
+            <div class="calc-btn calc-btn-op column" id="calc-AC">AC</div>
+            <div class="calc-btn calc-btn-op column" id="calc-clear">&#8676;</div>
+            <div class="calc-btn calc-btn-op column" id="calc-division">&#247;</div>
+        </div>
+        <div div class="row">
+            <div class="calc-btn calc-btn-num column" id="calc-7">7</div>
+            <div class="calc-btn calc-btn-num column" id="calc-8">8</div>
+            <div class="calc-btn calc-btn-num column" id="calc-9">9</div>
+            <div class="calc-btn calc-btn-op column" id="calc-multiply">*</div>
+        </div>        
+        <div div class="row">
+            <div class="calc-btn calc-btn-num column" id="calc-4">4</div>
+            <div class="calc-btn calc-btn-num column" id="calc-5">5</div>
+            <div class="calc-btn calc-btn-num column" id="calc-6">6</div>
+            <div class="calc-btn calc-btn-op column" id="calc-minus">-</div>
+        </div>        
+        <div div class="row">
+            <div class="calc-btn calc-btn-num column" id="calc-1">1</div>
+            <div class="calc-btn calc-btn-num column" id="calc-2">2</div>
+            <div class="calc-btn calc-btn-num column" id="calc-3">3</div>
+            <div class="calc-btn calc-btn-op column" id="calc-plus">+</div>
+        </div>       
+        <div div class="row">
+            <div class="calc-btn calc-btn-num column" id="calc-0">0</div>
+            <div class="calc-btn calc-btn-num column" id="calc-.">.</div>
+            <div class="calc-btn calc-btn-op column" id="calc-equal">=</div>
+        </div>        
+    </div>
+    <script>
+        var zeroBtn = document.getElementById('calc-0');
+        var oneBtn = document.getElementById('calc-1');
+        var twoBtn = document.getElementById('calc-2');
+        var threeBtn = document.getElementById('calc-3');
+        var fourBtn = document.getElementById('calc-4');
+        var fiveBtn = document.getElementById('calc-5');
+        var sixBtn = document.getElementById('calc-6');
+        var sevenBtn = document.getElementById('calc-7');
+        var eightBtn = document.getElementById('calc-8');
+        var nineBtn = document.getElementById('calc-9');
+        var decimalBtn = document.getElementById('calc-.');
+
+        var equalBtn = document.getElementById('calc-equal');
+        var plusBtn = document.getElementById('calc-plus');
+        var minusBtn = document.getElementById('calc-minus');
+        var multiplyBtn = document.getElementById('calc-multiply');
+        var divideBtn = document.getElementById('calc-division');
+
+        var displayVal = '0';
+        var pendingVal;
+        var evalStringArray = [];
+
+        var ACBtn = document.getElementById('calc-AC');
+        var clearBtn = document.getElementById('calc-clear');
+        var displayValElement = document.getElementById('display-val');
+
+        var calcNumBtns = document.getElementsByClassName('calc-btn-num');
+        var calcOpBtns = document.getElementsByClassName('calc-btn-op');
+
+        var updateDisplayVal = (clickObj) => {
+            var btnText = clickObj.target.innerText;
+            if(displayVal === '0')
+                displayVal = '';
+
+            displayVal += btnText;
+            displayValElement.innerText = displayVal;
+            
+        }
+
+        var performOperation = (clickObj) => {
+            var operator = clickObj.target.innerText;
+            switch(operator){
+                case '+':
+                    pendingVal = displayVal;
+                    displayVal = '0';
+                    displayValElement.innerText = displayVal;
+                    evalStringArray.push(pendingVal);
+                    evalStringArray.push('+');
+                    break;
+
+                case '-':
+                    pendingVal = displayVal;
+                    displayVal = '0';
+                    displayValElement.innerText = displayVal;
+                    evalStringArray.push(pendingVal);
+                    evalStringArray.push('-');
+                    break;
+
+                case '*':
+                    pendingVal = displayVal;
+                    displayVal = '0';
+                    displayValElement.innerText = displayVal;
+                    evalStringArray.push(pendingVal);
+                    evalStringArray.push('*');
+                    break;
+
+                case '÷':
+                    pendingVal = displayVal;
+                    displayVal = '0';
+                    displayValElement.innerText = displayVal;
+                    evalStringArray.push(pendingVal);
+                    evalStringArray.push('/');
+                    break;
+                case '=':
+                    evalStringArray.push(displayVal);
+                    var evaluation = eval(evalStringArray.join(' '));
+                    displayVal = evaluation + '';
+                    displayValElement.innerText = displayVal;
+                    evalStringArray = [];
+                    break;
+                }
+            }
+
+        for(let i = 0; i < calcNumBtns.length; i++){
+            calcNumBtns[i].addEventListener('click', updateDisplayVal, false);
+        }
+
+        for(let i = 0; i < calcOpBtns.length; i++){
+            calcOpBtns[i].addEventListener('click', performOperation, false);
+        }
+
+        ACBtn.onclick = () =>{
+            displayVal = '0';
+            pendingVal = undefined;
+            evalStringArray = [];
+            displayValElement.innerHTML = displayVal;
+        }
+
+        clearBtn.onclick = () => {
+            let lengthOfDisplayVal = displayVal.length;
+            displayVal = displayVal.slice(0,lengthOfDisplayVal - 1);
+            displayValElement.innerText = displayVal;
+
+            if (displayVal === ''){
+                displayValElement.innerText = '0';
+            }
+        }
+
+        decimalBtn.onclick = () => {
+            if(!displayVal.includes('.')){
+                decimalBtn += '.';
+            }
+            displayValElement.innerText = displayVal;
+        }
+
+    </script>
+</body>
+</html>
